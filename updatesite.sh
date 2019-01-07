@@ -17,10 +17,22 @@ drush ucan ark218,gsl217,rbc218,ena219
 #should I remove admin from everyone for now? probably
 
 #disable modules
-drush dis overlay,panels,dashboard,
+
+#disable, don't uninstall:
+drush dis comments,tracker
+
+#disable, then uninstall
+$dis="overlay,panels,dashboard,color,colors,imce_mkdir"
+$dis1="fullcalendar_colors"
+
+drush dis "$dispmu"
 
 #uninstall the disabled modules
-drush pmu overlay,panels,dashboard,
+drush pmu "$dis"','"$dis1"
+
+#don't uninstall
+#      comments,tracker
+
 
 #maybe add something in here displaying other modules that should be uninstalled.
 
@@ -39,6 +51,14 @@ drush pm-list --type=module --status=disabled
 
 #list content types that don't have any content?
 
+#is there a roster type?
+#   if so look at the number of pieces of content
+#         disable if not too many?
+
+
+# Check for the Documents archive feature
+#  is there content in there?
+
 
 #other config:
 
@@ -51,6 +71,10 @@ drush pm-list --type=module --status=disabled
 #list modules?
 #list
 
+#check for the
+#   bxslider
+#   webforms
+#   field_permissions
 
 #backup the db before doing a updb
 drush
