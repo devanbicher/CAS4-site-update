@@ -1,0 +1,22 @@
+remove:
+	tpc220
+       	ark218
+	rbc218
+	gsl217
+
+
+disable:
+	content_overlay
+	dashboard
+
+configure:
+	LDAP (also maybe install the feature for the new nis.cc.lehigh.edu setup
+	
+
+
+print out:
+      users
+      disabled modules
+      content types
+      count of content per type
+      Views?
