@@ -16,12 +16,17 @@ drush upwd --password="$(pwgen -s 32)" "$uid1"
 drush vset site_mail "incasweb@lehigh.edu"
 
 #remove people
-drush ucan ark218,gsl217,rbc218,ena219
+drush ucan -y ark218,gsl217,rbc218,ena219
 
 #should I remove admin from everyone for now? probably
 
-#### Disable modules
+#backup database before disabling uninstalled modules
 
+#Uninstall disabled modules
+
+
+
+#### Disable modules now
 #disable, don't uninstall:
 drush dis -y comments,tracker
 
@@ -48,16 +53,6 @@ rm -r ./modules/UNINSTALLmodules
 
 #enable modules
 drush en module_filter,filter_perms,view_unpublished,syslog
-
-# list modules
-echo "ENABLED Modules"
-drush pm-list --type=module --status=enabled
-
-echo "--------------------------"
-echo "DISABLED Modules"
-drush pm-list --type=module --status=disabled
-#list enabled FEATURES only
-
 
 #list content types that don't have any content?
 
@@ -87,12 +82,21 @@ drush pm-list --type=module --status=disabled
 #   field_permissions
 
 #backup the db before doing a updb
-drush
+##### drush bam-backup
 #update the db
 drush updb
 #clear the cache
 drush cc all
 #backup the db again
-drush
+#### drush bam-backup
 #one more cach clear
 drush cc all
+
+# list modules
+echo "ENABLED Modules"
+drush pm-list --type=module --status=enabled
+
+echo "--------------------------"
+echo "DISABLED Modules"
+drush pm-list --type=module --status=disabled
+#list enabled FEATURES only
