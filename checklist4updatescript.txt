@@ -3,15 +3,21 @@ remove:
        	ark218
 	rbc218
 	gsl217
+	vrt221
 
+setup:
+	new username and email for uid1
 
 disable:
 	content_overlay
 	dashboard
 
-configure:
-	LDAP (also maybe install the feature for the new nis.cc.lehigh.edu setup
-	
+enable:
+	lehigh_ldap  (feature for enabling LDAP and setting up the lehigh server)
+
+
+configure
+	enable revisioning on all content types	
 
 
 print out:
@@ -19,4 +25,7 @@ print out:
       disabled modules
       content types
       count of content per type
-      Views?
+      Views information
+
+
+
