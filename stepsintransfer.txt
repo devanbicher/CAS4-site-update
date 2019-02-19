@@ -1,0 +1,37 @@
+The purpose of this file is to have a running document of the steps that I need to take when transferring a website.
+
+
+########  -- CAS2 -- ##########
+1. cd to the site
+2. run transfermodulelist <sitename>
+
+########  -- CAS4 -- ##########
+1. go to the ~/cas2modulelists
+2. run "chekmodules <name_of_site-modules-date.csv>"
+3. Note modules on this list
+   a.  Disable/uninstall
+   b.  Modules that need to be kept for now
+--------- AT this point I need a succinct way of adding modules to a list to supply to my transfer site script so that they can be disabled
+
+
+########  -- CAS4 -- ##########
+
+1. Install new website, with same name as the one to be transferred
+2. add new website to the host file on my computer, ONLY WHILE TESTING
+
+########  -- CAS2 -- ##########
+
+1. Put cas2 theme into git
+   a. initialize git in themes folder
+   b. add theme, commit
+   c. setup repo in gogs
+   d. add remote repo, push
+2. Make sure private folder is setup - for doing a backup_migrate dump
+3. Perform the backup migrate dump
+4. Copy files to cas4
+5. Copy backup_migrate dump to cas4
+
+
+########  -- CAS4 -- ##########
+1. Run the transfer site script to update some stuff on the site.
+2. check to make sure it is working.

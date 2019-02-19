@@ -1,13 +1,13 @@
 #!/bin/bash
 
 #do a check to make sure both of these exists
-site=$1
-name=$2
+site="$1"
+short="$2"
 
 cd /var/www/drupal/sites/$site
 
-#update user 1
-uid1='cas_$name_admin'
+#update user 1, don't need to backup before that
+uid1="cas_$short"'_admin'
 drush sqlq 'update users set name="$uid1",mail="incasweb@lehigh.edu" where uid=1';
 
 drush upwd --password="$(pwgen -s 32)" "$uid1"
@@ -15,16 +15,15 @@ drush upwd --password="$(pwgen -s 32)" "$uid1"
 #set site mail
 drush vset site_mail "incasweb@lehigh.edu"
 
-#remove people
-drush ucan -y ark218,gsl217,rbc218,ena219
+#remove people, don't need to backup before this
+drush ucan -y ark218,gsl217,rbc218,ena219,vrt221
 
 #should I remove admin from everyone for now? probably
 
 #backup database before disabling uninstalled modules
 
-#Uninstall disabled modules
-
-
+#Uninstall disabled modules from the old server
+drush pmu $(drush pm-list --type=module --status=disabled --pipe | tr '\n' ,)
 
 #### Disable modules now
 #disable, don't uninstall:
@@ -43,7 +42,7 @@ drush pmu -y "$dis"
 
 ### remove modules that aren't on the server
 #if the modules folder exists
-cp -r ~/UNINSTALLmodules ./modules
+cp -r ~/modules-transfer/UNINSTALLmodules ./modules
 drush dis -y oauth_common,panels,colors
 drush pmu -y oauth_common,panels,colors
 rm -r ./modules/UNINSTALLmodules
@@ -52,7 +51,7 @@ rm -r ./modules/UNINSTALLmodules
 #maybe add something in here displaying other modules that should be uninstalled.
 
 #enable modules
-drush en module_filter,filter_perms,view_unpublished,syslog
+drush en module_filter,filter_perms,view_unpublished,syslog,diff
 
 #list content types that don't have any content?
 
