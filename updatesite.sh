@@ -20,9 +20,15 @@ drush ucan -y ark218,gsl217,rbc218,ena219,vrt221
 
 #should I remove admin from everyone for now? probably
 
-#backup database before disabling uninstalled modules
+#### BACKUP database before disabling uninstalled modules
+# test to make sure  files/private/backup_migrate/manual  exists
+# check it's permissions
+drush bb
+cp -r files/private/backup_migrate/manual files/private/backup_migrate/bu-b4modules-$(date +%m%d%H%M)
+
 
 #Uninstall disabled modules from the old server
+#this won't work without making sure that these modules are on the server. I might need a more sophisticated script to make this work
 drush pmu $(drush pm-list --type=module --status=disabled --pipe | tr '\n' ,)
 
 #### Disable modules now
